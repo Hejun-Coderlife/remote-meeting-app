@@ -1,5 +1,18 @@
 {
   "version": 2,
-  "buildCommand": "ls -la && cd client && npm install && npm run build",
-  "outputDirectory": "client/build"
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "client/build/$1"
+    }
+  ]
 }
